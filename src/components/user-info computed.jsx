@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function UserInfo() { 
+export default function UserInfoComputed() { 
 
     const [user, setUser] = useState({    
     firstName:"",
@@ -13,9 +13,17 @@ export default function UserInfo() {
     residence: ""
 })
 
+const handleChange = (event) => {
+  const {name, value} = event.target
+
+  setUser((prevFormData) => ({
+    ...prevFormData,
+    [name]: value,   // computed property value
+  }));
+}
+
 const handleSubmit = (event) => {
   event.preventDefault();
-  
   setUser({
   firstName:"",
   lastName: "",
@@ -38,112 +46,93 @@ const handleSubmit = (event) => {
         onSubmit={handleSubmit} >
             <h2 className='text-2xl font-bold '>
               Enter Info</h2>
-            <input type="text"
+            <input
+            name="firstName" 
+            type="text"
              placeholder='FirstName'
              className='border outline-none rounded-md p-2 ' 
             value={user.firstName} 
-            onChange={(e) =>
-              setUser({
-                ...user,
-                firstName: e.target.value 
-              })
-            }
+            onChange={handleChange}
+            
             />
-            <input type="text"
+            <input
+            name= "lastName"
+             type="text"
              placeholder='LastName'
              className='border outline-none rounded-md p-2'
              value={user.lastName}
-             onChange={(e) =>
-              setUser({
-                ...user,
-                lastName: e.target.value 
-              })
-            }
+             onChange={handleChange}
+            
               />
-            <input type="email"
+            <input 
+            name= "email"
+            type="email"
              placeholder='Email' 
              className='border outline-none rounded-md p-2'
              value={user.email}
-             onChange={(e) =>
-              setUser({
-                ...user,
-                email: e.target.value 
-              })
-            }
+             onChange={handleChange}
+            
               />
-            <input type="tel" 
+            <input 
+            name='phone'
+            type="tel" 
             placeholder='Telephone Number'
              className='border outline-none rounded-md p-2'
              value={user.phone}
-             onChange={(e) =>
-              setUser({
-                ...user,
-                phone: e.target.value 
-              })
-            }
+             onChange={handleChange}
+            
               />
             <label 
             className='flex flex-col gap-3 text-gray-500'>
                 Enter your date of birth
                 <input 
+                name='dob'
                 className='gap-3 border flex flex-col p-2 rounded-2xl'
                  type="date" 
                  value={user.dob}
-                 onChange={(e) =>
-                  setUser({
-                    ...user,
-                    dob: e.target.value 
-                  })
-                }
+                 onChange={handleChange}
+                
                  />
             </label>
             <label>
-                <input type="radio" 
+                <input
+                name='gender' 
+                type="radio" 
                 value={"Male"}
                  checked={user.gender === "Male"}
-                 onChange={(e) =>
-                  setUser({
-                    ...user,
-                    gender: e.target.value 
-                  })
-                }
+                 onChange={handleChange}
+                
                 />
                 Male
             </label>
             <label>
-                <input type="radio" 
+                <input 
+                name='gender'
+                type="radio" 
                 value={"Female"}
                 checked={user.gender === "Female"}
-                onChange={(e) =>
-                  setUser({
-                    ...user,
-                    gender: e.target.value 
-                  })
-                }
+                onChange={handleChange}
+                
                 />
                 Female
             </label>
-            <input type="url" 
+            <input 
+            name='github'
+            type="url" 
             placeholder='Github' 
             className='border outline-none rounded-md p-2'
              value={user.github}
-             onChange={(e) =>
-              setUser({
-                ...user,
-                github: e.target.value 
-              })
-            }
+             onChange={handleChange}
+            
              />
-            <input type="text"
+            <input 
+            name='residence'
+            type="text"
              placeholder='Place of Residence'
              className='border outline-none rounded-md p-2'
              value={user.residence}
-             onChange={(e) =>
-              setUser({
-                ...user,
-                residence: e.target.value 
-              })
-            }
+             onChange={handleChange}
+            
               />
 <button 
 className='bg-black text-white p-3 rounded-2xl'>
